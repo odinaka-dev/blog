@@ -18,7 +18,7 @@ const Blog = () => {
 
 const SingleBlogPost = () => {
   return (
-    <section className="single_posts max-w-[80%] mx-auto">
+    <section className="single_posts max-w-[90%] sm:max-w-[80%] mx-auto">
       <div className="my-12 mt-18">
         <div className="flex  gap-8 items-center text-sm mb-4">
           <p className="text-zinc-900 font-semibold">Development</p>
@@ -134,7 +134,7 @@ const PopularPost = () => {
   ];
 
   return (
-    <main className="blogs_posts max-w-[80%] mx-auto">
+    <main className="blogs_posts max-w-[90%] sm:max-w-[80%] mx-auto">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl sm:text-2xl md:text-3xl text-zinc-800 font-semibold">
           Popular Post
