@@ -50,10 +50,10 @@ const SubBanner = () => {
   return (
     <section className="max-w-[80%] mx-auto">
       <div className="banner_text">
-        <h1 className="text-zinc-700 font-bold uppercase">How we work</h1>
+        <h1 className="text-blue-950 font-bold uppercase">How we work</h1>
         <div className="grid grid-cols-1  md:grid-cols-2 items-center gap-8  md:gap-24 my-8">
           <div className="sub_header">
-            <h1 className="text-zinc-700 text-3xl font-semibold capitalize text-balance">
+            <h1 className="text-blue-950 text-3xl font-semibold capitalize text-balance">
               This is How Blogspot works for our Bloggers.
             </h1>
           </div>
