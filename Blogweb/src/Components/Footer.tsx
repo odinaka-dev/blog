@@ -30,7 +30,7 @@ const Footer = () => {
           <Logo />
         </div>
         <div className="nav_links">
-          <ul className="flex items-center gap-12 capitalize">
+          <ul className="flex items-center gap-4 sm:gap-12 capitalize">
             {Navigation.map((navBar) => (
               <li
                 className="cursor-pointer text-zinc-700 hover:text-blue-900 transition-colors duration-300"
