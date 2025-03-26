@@ -22,10 +22,10 @@ const AboutBanner = () => {
   return (
     <section className="">
       <div className="text-center my-16 max-w-[90%]  sm:max-w-[80%] mx-auto">
-        <h1 className="text-zinc-700 text-[18px] font-semibold capitalize">
+        <h1 className="text-blue-950 text-[18px] font-semibold capitalize">
           about us
         </h1>
-        <h1 className="text-zinc-900 text-2xl  sm:text-2xl  md:text-4xl font-semibold my-4">
+        <h1 className="text-blue-950 text-2xl  sm:text-2xl  md:text-4xl font-bold my-4">
           Creative Blog Writting and Publishing site, <br /> Community and
           Space.
         </h1>
