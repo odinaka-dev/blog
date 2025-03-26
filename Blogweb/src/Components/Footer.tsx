@@ -2,6 +2,7 @@ import { FaFacebook, FaWhatsapp } from "react-icons/fa";
 import Logo from "./Logo";
 import { Link } from "react-router";
 import { FaInstagram, FaSquareXTwitter } from "react-icons/fa6";
+
 const Footer = () => {
   const Navigation = [
     {
