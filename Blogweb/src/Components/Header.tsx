@@ -46,16 +46,28 @@ const Header = () => {
             transition={{ duration: 0.5 }}
             className="absolute shadow-xl md:hidden flex flex-col items-center space-y-4 bg-white py-8 z-10 w-full"
           >
-            <li className="cursor-pointer text-zinc-900 font-light hover:text-blue-950 hover:font-normal duration-300 transition-colors">
+            <li
+              onClick={() => setMenuOpen(false)}
+              className="cursor-pointer text-zinc-900 font-light hover:text-blue-950 hover:font-normal duration-300 transition-colors"
+            >
               <Link to={"/"}>Home</Link>
             </li>
-            <li className="cursor-pointer text-zinc-900 font-light hover:text-blue-950 hover:font-normal duration-300 transition-colors">
+            <li
+              onClick={() => setMenuOpen(false)}
+              className="cursor-pointer text-zinc-900 font-light hover:text-blue-950 hover:font-normal duration-300 transition-colors"
+            >
               <Link to={"/about"}>About</Link>
             </li>
-            <li className="cursor-pointer text-zinc-900 font-light hover:text-blue-950 hover:font-normal duration-300 transition-colors">
+            <li
+              onClick={() => setMenuOpen(false)}
+              className="cursor-pointer text-zinc-900 font-light hover:text-blue-950 hover:font-normal duration-300 transition-colors"
+            >
               <Link to={"/blogs"}>Blogs</Link>
             </li>
-            <li className="cursor-pointer text-white bg-blue-700 py-2 px-8 rounded-sm font-normal hover:text-white hover:bg-blue-950 duration-300 transition-colors">
+            <li
+              onClick={() => setMenuOpen(false)}
+              className="cursor-pointer text-white bg-blue-700 py-2 px-8 rounded-sm font-normal hover:text-white hover:bg-blue-950 duration-300 transition-colors"
+            >
               <Link to={"/contact"}>Contact Us</Link>
             </li>
           </motion.ul>
