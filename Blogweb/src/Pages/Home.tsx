@@ -24,9 +24,9 @@ const WelcomeBanner = () => {
   return (
     <section className="welcome_banner  bg-blue-900">
       <div className="banner_text relative py-[40px]">
-        <div className="grid grid-cols-2 items-center gap-24 max-w-[80%] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-24 max-w-[90%]  md:max-w-[80%] mx-auto">
           <div className="text-white">
-            <h1 className="text-5xl font-semibold leading-15">
+            <h1 className="text-4xl md:text-5xl font-semibold leading-12 md:leading-15">
               BlogSpot the place for all blog contents
             </h1>
             <p className="text-white font-light leading-7 mt-4">
@@ -56,20 +56,24 @@ const WelcomeBanner = () => {
 // the sub-welcome banner
 const SubBanner = () => {
   return (
-    <section className="max-w-[80%] mx-auto mt-16">
+    <section className="max-w-[90%] sm:max-w-[80%] mx-auto mt-16">
       <div className="sub_content">
-        <img src={SubImage} alt="" className="h-120 w-[100vw]" />
-        <div className="flex justify-end py-8 bg-white rounded-xl relative top-[-150px] ml-32 px-8">
+        <img
+          src={SubImage}
+          alt=""
+          className="h-60 sm:h-100 md:h-120 w-[100vw]"
+        />
+        <div className="flex justify-end py-8 bg-white rounded-xl relative top-[-100px] md:top-[-100px] lg:top-[-150px] ml-4 sm:ml-28 md:ml-32 px-8">
           <div>
             <div className="flex  gap-8 items-center text-sm mb-4">
               <p className="text-zinc-900 font-semibold">Development</p>
               <p className="text-zinc-600 font-semibold">16th of March 2025</p>
             </div>
-            <h1 className="text-zinc-900 font-semibold text-3xl">
+            <h1 className="text-zinc-900 font-semibold text-xl md:text-3xl">
               How to make a Game look more attractive with New VR & AI
               Technology
             </h1>
-            <p className="text-zinc-500 font-normal py-6">
+            <p className="text-zinc-500 font-normal py-6 text-[14px] sm:text-[16px]">
               Google has been investing in AI for many years and bringing its
               benefits to individuals, businesses and communities. Whether it’s
               publishing state-of-the-art research, building helpful products or
@@ -93,7 +97,7 @@ const SubBanner = () => {
 const RecentPost = () => {
   return (
     <section className="max-w-[80%] mx-auto relative top-[-50px]">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
         <h1 className="text-3xl text-zinc-800 font-semibold">
           Our Recent Post
         </h1>
@@ -103,7 +107,7 @@ const RecentPost = () => {
           </button>
         </div>
       </div>
-      <div className="post_grid grid grid-cols-2 gap-8 items-center mt-8">
+      <div className="post_grid grid md:grid-cols-2 gap-8 items-center mt-8">
         <div className="image">
           <img src={ThirdImage} alt="" />
         </div>
