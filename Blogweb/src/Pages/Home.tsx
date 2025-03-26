@@ -148,6 +148,7 @@ const RecentPost = () => {
 const PopularPost = () => {
   const DummyPosts = [
     {
+      id: 1,
       Imagess: Rules,
       title: "8 Rules of Travelling In Sea You Need To Know",
       Description:
@@ -156,6 +157,7 @@ const PopularPost = () => {
       dates: "13 March 2023",
     },
     {
+      id: 2,
       Imagess: Build,
       title: "How to build strong portfolio and get a Job in UI/UX",
       Description:
@@ -164,6 +166,7 @@ const PopularPost = () => {
       dates: "11 March 2023",
     },
     {
+      id: 3,
       Imagess: FootBall,
       title: "How to Be a Professional Footballer in 2023",
       Description:
@@ -202,7 +205,7 @@ const PopularPost = () => {
               </p>
               <div className="btn_class">
                 <button className="text-purple-900 text-[14px] sm:text-[16px] font-bold underline cursor-pointer text-balance">
-                  <Link to={"/blogs"}>Read More</Link>
+                  <Link to={`/blog/${bloggss.id}`}>Read More</Link>
                 </button>
               </div>
             </div>
@@ -216,6 +219,7 @@ const PopularPost = () => {
 const SecondPopularPosts = () => {
   const DummyPosts = [
     {
+      id: 1,
       Imagess: Rules,
       title: "8 Rules of Travelling In Sea You Need To Know",
       Description:
@@ -224,6 +228,7 @@ const SecondPopularPosts = () => {
       dates: "13 March 2023",
     },
     {
+      id: 2,
       Imagess: Build,
       title: "How to build strong portfolio and get a Job in UI/UX",
       Description:
@@ -232,6 +237,7 @@ const SecondPopularPosts = () => {
       dates: "11 March 2023",
     },
     {
+      id: 3,
       Imagess: FootBall,
       title: "How to Be a Professional Footballer in 2023",
       Description:
@@ -240,6 +246,7 @@ const SecondPopularPosts = () => {
       dates: "16 March 2023",
     },
     {
+      id: 4,
       Imagess: Rules,
       title: "8 Rules of Travelling In Sea You Need To Know",
       Description:
@@ -248,6 +255,7 @@ const SecondPopularPosts = () => {
       dates: "13 March 2023",
     },
     {
+      id: 5,
       Imagess: Build,
       title: "How to build strong portfolio and get a Job in UI/UX",
       Description:
@@ -256,6 +264,7 @@ const SecondPopularPosts = () => {
       dates: "11 March 2023",
     },
     {
+      id: 6,
       Imagess: FootBall,
       title: "How to Be a Professional Footballer in 2023",
       Description:
@@ -304,7 +313,7 @@ const SecondPopularPosts = () => {
                 </p>
                 <div className="btn_class">
                   <button className="text-purple-900 text-[14px] sm:text-[16px] font-bold underline cursor-pointer text-balance">
-                    <Link to={"/blogs"}>Read More</Link>
+                    <Link to={`/blog/${bloggss.id}`}>Read More</Link>
                   </button>
                 </div>
               </div>
