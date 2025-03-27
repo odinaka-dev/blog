@@ -5,6 +5,7 @@ import Build from "../assets/build.png";
 import FootBall from "../assets/football.png";
 import SubFooter from "../Components/SubFooter";
 import Footer from "../Components/Footer";
+import { BiSearch } from "react-icons/bi";
 
 const Blogs = () => {
   return (
@@ -32,6 +33,14 @@ const BlogsBanner = () => {
           writers so that we can provide you the best blogs and articles posts
           for you to read them all along.
         </p>
+        <div className="search_Icon flex items-center gap-4 text-lg bg-white rounded-3xl mt-4 py-4 px-8 shadow-2xl">
+          <BiSearch />
+          <input
+            type="text"
+            className="bg-none text-zinc-900 outline-none w-full"
+            placeholder="Search your favorite blog..."
+          />
+        </div>
       </div>
     </section>
   );
