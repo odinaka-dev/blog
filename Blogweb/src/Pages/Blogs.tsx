@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router";
 import Rules from "../assets/Rules.png";
-import Build from "../assets/build.png";
-import FootBall from "../assets/football.png";
 import SubFooter from "../Components/SubFooter";
 import Footer from "../Components/Footer";
 import { BiSearch } from "react-icons/bi";
@@ -57,7 +55,6 @@ interface Blog {
 
 const BlogsPosts = () => {
   const [fetchBlogs, setFetchBlogs] = useState<Blog[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   const fetchingBlogs = async () => {
     try {

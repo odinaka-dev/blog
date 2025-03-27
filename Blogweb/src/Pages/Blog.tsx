@@ -3,10 +3,7 @@ import axios from "axios";
 import { Link } from "react-router";
 import BlogBanner from "../assets/blogBanner.png";
 import Rules from "../assets/Rules.png";
-import Build from "../assets/build.png";
-import FootBall from "../assets/football.png";
 import Footer from "../Components/Footer";
-import Blogs from "./Blogs";
 
 const Blog = () => {
   return (
@@ -115,7 +112,6 @@ interface PopularPost {
 
 const PopularPost = () => {
   const [popularFetch, setPopularFetch] = useState<PopularPost[]>([]);
-  const [isLoadaing, setIsLoading] = useState(false);
 
   const fetchPopularPosts = async () => {
     try {
