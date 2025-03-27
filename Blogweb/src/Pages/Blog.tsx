@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router";
 import BlogBanner from "../assets/blogBanner.png";
 import Rules from "../assets/Rules.png";
 import Build from "../assets/build.png";
 import FootBall from "../assets/football.png";
 import Footer from "../Components/Footer";
+import Blogs from "./Blogs";
 
 const Blog = () => {
   return (
@@ -102,36 +104,38 @@ const SingleBlogPost = () => {
   );
 };
 
+// define the type of data you are fetching
+interface PopularPost {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  createdAt: string;
+}
+
 const PopularPost = () => {
-  const DummyPosts = [
-    {
-      id: 1,
-      Imagess: Rules,
-      title: "8 Rules of Travelling In Sea You Need To Know",
-      Description:
-        "Travelling in sea has many advantages. Some of the advantages of transporting goods by sea include: you can ship large volumes at costs ",
-      subTitle: "Travel",
-      dates: "13 March 2023",
-    },
-    {
-      id: 2,
-      Imagess: Build,
-      title: "How to build strong portfolio and get a Job in UI/UX",
-      Description:
-        "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from ",
-      subTitle: "Development",
-      dates: "11 March 2023",
-    },
-    {
-      id: 3,
-      Imagess: FootBall,
-      title: "How to Be a Professional Footballer in 2023",
-      Description:
-        "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment. survival strategies to ensure proactive",
-      subTitle: "Sports",
-      dates: "16 March 2023",
-    },
-  ];
+  const [popularFetch, setPopularFetch] = useState<PopularPost[]>([]);
+  const [isLoadaing, setIsLoading] = useState(false);
+
+  const fetchPopularPosts = async () => {
+    try {
+      const response = await axios.get(
+        "https://task-server-w3yx.onrender.com/api/tasks"
+      );
+
+      if (response.status === 200) {
+        setPopularFetch(response.data.slice(0, 3));
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPopularPosts();
+  }, []);
+
+  const MAXLENGTH = 100;
 
   return (
     <main className="blogs_posts max-w-[90%] sm:max-w-[80%] mx-auto">
@@ -146,11 +150,11 @@ const PopularPost = () => {
         </div>
       </div>
       <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
-        {DummyPosts.map((bloggss, index) => (
-          <div className="potss" key={index}>
+        {popularFetch.map((bloggss) => (
+          <div className="potss" key={bloggss.id}>
             <div className="overflow-hidden">
               <img
-                src={bloggss.Imagess}
+                src={Rules}
                 className="w-full h-full object-cover transition-transform ease-in-out hover:scale-120 duration-500 cursor-pointer"
                 alt="Zoom Image"
               />
@@ -158,17 +162,19 @@ const PopularPost = () => {
             <div>
               <div className="flex gap-8 items-center">
                 <p className="text-sm text-zinc-700 font-semibold capitalize my-4">
-                  {bloggss.subTitle}
+                  {bloggss.subtitle}
                 </p>
                 <p className="text-sm text-balance text-zinc-500">
-                  {bloggss.dates}
+                  {bloggss.createdAt}
                 </p>
               </div>
               <h1 className="text-zinc-900 text-xl font-bold text-balance mb-4">
                 {bloggss.title}
               </h1>
               <p className="text-zinc-600 text-balance mb-4">
-                {bloggss.Description}
+                {bloggss.description.length > MAXLENGTH
+                  ? `${bloggss.description.slice(0, MAXLENGTH)}...`
+                  : bloggss.description}
               </p>
               <div className="btn_class">
                 <button className="text-purple-900 text-[14px] sm:text-[16px] font-bold underline cursor-pointer text-balance">
