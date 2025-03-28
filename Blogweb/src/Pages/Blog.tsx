@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
 import { useParams } from "react-router";
-import BlogBanner from "../assets/blogBanner.png";
 import Footer from "../Components/Footer";
 
 const Blog = () => {
@@ -27,8 +26,6 @@ interface Blog {
 const SingleBlogPost = () => {
   const { id } = useParams();
   const [blog, setBlog] = useState<Blog>({} as Blog);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchSingle = async () => {
@@ -44,8 +41,6 @@ const SingleBlogPost = () => {
         }
       } catch (error) {
         console.error("failed to fetch this blog from the server");
-      } finally {
-        setLoading(false);
       }
     };
 

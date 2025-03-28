@@ -5,9 +5,6 @@ import Eclipse from "../assets/eclipse.png";
 import BannerImage from "../assets/Banner.png";
 import SubImage from "../assets/Second.png";
 import ThirdImage from "../assets/Third.png";
-import Rules from "../assets/Rules.png";
-import Build from "../assets/build.png";
-import FootBall from "../assets/football.png";
 import SubFooter from "../Components/SubFooter";
 import Footer from "../Components/Footer";
 
