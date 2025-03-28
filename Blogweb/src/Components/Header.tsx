@@ -1,11 +1,40 @@
 import { useState } from "react";
 import Logo from "./Logo";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { LuSquareMenu } from "react-icons/lu";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/pageloader");
+    setTimeout(() => {
+      navigate("/about");
+    }, 3000);
+  };
+
+  const handleHome = () => {
+    navigate("/pageloader");
+    setTimeout(() => {
+      navigate("/");
+    }, 3000);
+  };
+
+  const handleContact = () => {
+    navigate("/pageloader");
+    setTimeout(() => {
+      navigate("/contact");
+    }, 3000);
+  };
+
+  const handleBlogs = () => {
+    navigate("/pageloader");
+    setTimeout(() => {
+      navigate("/blogs");
+    }, 3000);
+  };
 
   return (
     <nav className="relative py-4 bg-white shadow-lg z-50">
@@ -16,17 +45,29 @@ const Header = () => {
           </Link>
         </div>
         <ul className="hidden md:flex items-center space-x-10">
-          <li className="cursor-pointer text-zinc-900 font-light hover:text-blue-950 hover:font-normal duration-300 transition-colors">
-            <Link to={"/"}>Home</Link>
+          <li
+            onClick={handleHome}
+            className="cursor-pointer text-zinc-900 font-light hover:text-blue-950 hover:font-normal duration-300 transition-colors"
+          >
+            Home
           </li>
-          <li className="cursor-pointer text-zinc-900 font-light hover:text-blue-950 hover:font-normal duration-300 transition-colors">
-            <Link to={"/about"}>About</Link>
+          <li
+            onClick={handleNavigate}
+            className="cursor-pointer text-zinc-900 font-light hover:text-blue-950 hover:font-normal duration-300 transition-colors"
+          >
+            About
           </li>
-          <li className="cursor-pointer text-zinc-900 font-light hover:text-blue-950 hover:font-normal duration-300 transition-colors">
-            <Link to={"/blogs"}>Blogs</Link>
+          <li
+            onClick={handleBlogs}
+            className="cursor-pointer text-zinc-900 font-light hover:text-blue-950 hover:font-normal duration-300 transition-colors"
+          >
+            Blogs
           </li>
-          <li className="cursor-pointer text-white bg-blue-700 py-2 px-8 rounded-sm font-normal hover:text-white hover:bg-blue-950 duration-300 transition-colors">
-            <Link to={"/contact"}>Contact Us</Link>
+          <li
+            onClick={handleContact}
+            className="cursor-pointer text-white bg-blue-700 py-2 px-8 rounded-sm font-normal hover:text-white hover:bg-blue-950 duration-300 transition-colors"
+          >
+            Contact Us
           </li>
         </ul>
         <div
@@ -47,28 +88,40 @@ const Header = () => {
             className="absolute shadow-xl md:hidden flex flex-col items-center space-y-4 bg-white py-8 z-[1000] w-full"
           >
             <li
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                setMenuOpen(false);
+                handleHome();
+              }}
               className="cursor-pointer text-zinc-900 font-light hover:text-blue-950 hover:font-normal duration-300 transition-colors"
             >
-              <Link to={"/"}>Home</Link>
+              Home
             </li>
             <li
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                setMenuOpen(false);
+                handleNavigate();
+              }}
               className="cursor-pointer text-zinc-900 font-light hover:text-blue-950 hover:font-normal duration-300 transition-colors"
             >
-              <Link to={"/about"}>About</Link>
+              About
             </li>
             <li
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                setMenuOpen(false);
+                handleBlogs();
+              }}
               className="cursor-pointer text-zinc-900 font-light hover:text-blue-950 hover:font-normal duration-300 transition-colors"
             >
-              <Link to={"/blogs"}>Blogs</Link>
+              Blogs
             </li>
             <li
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                handleContact();
+                setMenuOpen(false);
+              }}
               className="cursor-pointer text-white bg-blue-700 py-2 px-8 rounded-sm font-normal hover:text-white hover:bg-blue-950 duration-300 transition-colors"
             >
-              <Link to={"/contact"}>Contact Us</Link>
+              Contact Us
             </li>
           </motion.ul>
         )}

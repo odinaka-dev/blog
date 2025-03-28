@@ -9,6 +9,7 @@ import About from "./Pages/About";
 import Blogs from "./Pages/Blogs";
 import Blog from "./Pages/Blog";
 import Contact from "./Pages/Contact";
+import Pageloader from "./Components/pageLoader";
 
 const route = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const route = createBrowserRouter([
       { path: "blogs", element: <Blogs /> },
       { path: "blog/:id", element: <Blog /> },
       { path: "contact", element: <Contact /> },
+      { path: "pageloader", element: <Pageloader /> },
     ],
   },
 ]);
