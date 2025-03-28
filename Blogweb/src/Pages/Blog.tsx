@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
+import { useParams } from "react-router";
 import BlogBanner from "../assets/blogBanner.png";
 import Footer from "../Components/Footer";
 
@@ -14,85 +15,80 @@ const Blog = () => {
   );
 };
 
+interface Blog {
+  _id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  createdAt: string;
+}
+
 const SingleBlogPost = () => {
+  const { id } = useParams();
+  const [blog, setBlog] = useState<Blog>({} as Blog);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchSingle = async () => {
+      try {
+        const response = await axios.get(
+          `https://task-server-0xvq.onrender.com/api/tasks/${id}`
+        );
+        if (response.status === 200) {
+          setBlog(response.data);
+          console.log(response.data);
+        } else {
+          console.error("could not fetch this blog");
+        }
+      } catch (error) {
+        console.error("failed to fetch this blog from the server");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSingle();
+  }, [id]);
+
   return (
     <section className="single_posts max-w-[90%] sm:max-w-[80%] mx-auto">
-      <div className="my-12 mt-18">
+      <div
+        className="my-12 mt-18 pb-8 border-b border-b-zinc-300"
+        key={blog._id}
+      >
         <div className="flex  gap-8 items-center text-sm mb-4">
-          <p className="text-zinc-900 font-semibold">Development</p>
-          <p className="text-zinc-600 font-semibold">16th of March 2025</p>
+          <p
+            className={`text-sms p-2 rounded-2xl font-semibold capitalize my-4 ${
+              blog.subtitle === "Technology"
+                ? "text-red-700 bg-red-100"
+                : blog.subtitle === "Agriculture"
+                ? "text-green-700 bg-green-100"
+                : blog.subtitle === "Development"
+                ? "text-yellow-700 bg-yellow-100"
+                : blog.subtitle === "Fashion"
+                ? "text-pink-700 bg-pink-100"
+                : "text-blue-700 bg-blue-100"
+            }`}
+          >
+            {blog.subtitle}
+          </p>
+          <p className="text-zinc-600 font-semibold">
+            {new Date(blog.createdAt).toDateString()}
+          </p>
         </div>
         <div className="headerBlog">
-          <h1 className="text-zinc-900 font-semibold text-xl sm:text-2xl  md:text-3xl hover:text-zinc-500 duration-300 cursor-pointer">
-            How to make a Game look more attractive with New VR & AI Technology
+          <h1 className="text-blue-950 font-semibold text-xl sm:text-2xl  md:text-3xl">
+            {blog.title}
           </h1>
         </div>
         <div className="my-2 mt-8">
-          <img src={BlogBanner} alt="" />
+          <img src={blog.image} alt="" className="w-250 h-80" />
         </div>
         <div className="content_texts">
           <div className="max-w-[100%] md:max-w-[90%] mx-auto text-zinc-500 text-balance mt-8">
-            <p>
-              Virtual reality (VR) is revolutionizing the gaming industry,
-              offering players immersive experiences like never before. With
-              advancements in graphics rendering, haptic feedback, and AI-driven
-              interactions, gamers can step into expansive digital worlds that
-              feel more lifelike than ever. From fast-paced action games to
-              deeply narrative-driven RPGs, VR is pushing the boundaries of
-              interactive entertainment. The development of standalone VR
-              headsets and powerful PC-driven VR systems has allowed more
-              players to experience high-fidelity virtual environments without
-              being tethered to cumbersome hardware.
-            </p>
-            <br />
-            <p>
-              Breakthroughs in AI are also transforming how games are developed
-              and played. Procedural generation powered by AI allows for
-              infinite world-building, while machine learning enhances NPC
-              behavior, making in-game characters more intelligent and
-              responsive. Developers are also integrating AI into VR
-              experiences, enabling real-time voice recognition, adaptive
-              storytelling, and dynamic environments that react to player
-              actions. This shift is making single-player and multiplayer
-              experiences more engaging and unpredictable, ensuring that no two
-              playthroughs feel exactly the same.
-            </p>
-            <br />
-            <p>
-              The integration of VR in social gaming has led to the rise of
-              virtual spaces where players can connect, compete, and collaborate
-              in entirely digital environments. Platforms like the Metaverse are
-              shaping the future of online interaction, blending gaming, social
-              networking, and digital commerce. Gamers can now build, explore,
-              and interact with others in persistent virtual worlds, making
-              online gaming more engaging and interactive than ever. With
-              features like voice chat, gesture tracking, and shared VR spaces,
-              social gaming is moving toward a new era of immersion and
-              presence.
-            </p>
-            <br />
-            <p>
-              More than ever, gaming companies are leveraging AI and VR together
-              to create hyper-realistic gaming experiences. In racing
-              simulations, AI-driven opponents can learn from player behavior,
-              making each race more challenging and dynamic. In VR fitness
-              games, AI can analyze movements and provide real-time feedback to
-              improve performance. Meanwhile, game developers are utilizing
-              neural networks to create more lifelike animations, procedural
-              content, and physics-based interactions that react to the player's
-              input in a seamless and natural way.
-            </p>
-            <p>
-              The future of gaming and VR holds even greater promise as
-              advancements in cloud computing, 5G, and augmented reality (AR)
-              continue to evolve. Cloud-based VR gaming is on the rise, reducing
-              the need for high-end hardware and making immersive experiences
-              accessible to a wider audience. The gaming industry is on the cusp
-              of a major transformation, and as VR technology matures, players
-              can expect even deeper, more interactive experiences. Stay tuned
-              for more innovations in the months and years ahead as VR and AI
-              redefine what’s possible in the world of gaming.
-            </p>
+            {blog.description}
           </div>
         </div>
       </div>
@@ -102,7 +98,7 @@ const SingleBlogPost = () => {
 
 // define the type of data you are fetching
 interface PopularPost {
-  id: string;
+  _id: string;
   title: string;
   subtitle: string;
   description: string;
@@ -147,7 +143,7 @@ const PopularPost = () => {
       </div>
       <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
         {popularFetch.map((bloggss) => (
-          <div className="potss" key={bloggss.id}>
+          <div className="potss" key={bloggss._id}>
             <div className="overflow-hidden h-60">
               <img
                 src={bloggss.image}
@@ -186,7 +182,7 @@ const PopularPost = () => {
               </p>
               <div className="btn_class">
                 <button className="text-blue-700 text-[14px] sm:text-[14px] font-bold cursor-pointer text-balance hover:text-purple-900 duration-200 transition-colors">
-                  <Link to={`/blog/${bloggss.id}`}>Read More</Link>
+                  <Link to={`/blog/${bloggss._id}`}>Read More</Link>
                 </button>
               </div>
             </div>

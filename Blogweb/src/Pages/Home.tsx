@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router";
+import axios from "axios";
 import Eclipse from "../assets/eclipse.png";
 import BannerImage from "../assets/Banner.png";
 import SubImage from "../assets/Second.png";
@@ -67,9 +68,9 @@ const SubBanner = () => {
           alt=""
           className="h-60 sm:h-100 md:h-120 w-[100vw]"
         />
-        <div className="flex justify-end py-8 bg-white rounded-xl relative  md:top-[-100px] lg:top-[-150px] sm:ml-28 md:ml-32 mb-24 md:mb-0 px-8">
+        <div className="flex justify-end py-8 bg-white rounded-xl relative  md:top-[-100px] lg:top-[-150px] sm:ml-28 md:ml-32 mb-24 md:mb-0 px-4 sm:px-8">
           <div>
-            <div className="flex  gap-8 items-center text-sm mb-4">
+            <div className="flex gap-8 items-center text-sm mb-4">
               <p className="text-zinc-900 font-semibold">Development</p>
               <p className="text-zinc-600 font-semibold">16th of March 2025</p>
             </div>
@@ -100,7 +101,7 @@ const SubBanner = () => {
 
 const RecentPost = () => {
   return (
-    <section className="max-w-[84%] sm:max-w-[80%] mx-auto relative top-[-50px]">
+    <section className="max-w-[90%] sm:max-w-[80%] mx-auto relative top-[-50px]">
       <div className="flex gap-2 flex-row justify-between items-center">
         <h1 className="text-xl sm:text-2xl md:text-3xl text-zinc-800 font-semibold">
           Our Recent Post
@@ -145,67 +146,82 @@ const RecentPost = () => {
 };
 
 // sub popular post or any other section
+interface PopularPost {
+  _id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  createdAt: string;
+}
+
 const PopularPost = () => {
-  const DummyPosts = [
-    {
-      id: 1,
-      Imagess: Rules,
-      title: "8 Rules of Travelling In Sea You Need To Know",
-      Description:
-        "Travelling in sea has many advantages. Some of the advantages of transporting goods by sea include: you can ship large volumes at costs ",
-      subTitle: "Travel",
-      dates: "13 March 2023",
-    },
-    {
-      id: 2,
-      Imagess: Build,
-      title: "How to build strong portfolio and get a Job in UI/UX",
-      Description:
-        "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from ",
-      subTitle: "Development",
-      dates: "11 March 2023",
-    },
-    {
-      id: 3,
-      Imagess: FootBall,
-      title: "How to Be a Professional Footballer in 2023",
-      Description:
-        "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment. survival strategies to ensure proactive",
-      subTitle: "Sports",
-      dates: "16 March 2023",
-    },
-  ];
+  const [popularFetch, setPopularFetch] = useState<PopularPost[]>([]);
+
+  const fetchPopularPosts = async () => {
+    try {
+      const response = await axios.get(
+        "https://task-server-0xvq.onrender.com/api/tasks"
+      );
+
+      if (response.status === 200) {
+        setPopularFetch(response.data.slice(0, 3));
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPopularPosts();
+  }, []);
+
+  const MAXLENGTH = 100;
 
   return (
     <main className="blogs_posts">
       <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
-        {DummyPosts.map((bloggss, index) => (
-          <div className="potss" key={index}>
-            <div className="overflow-hidden">
+        {popularFetch.map((bloggss) => (
+          <div className="potss" key={bloggss._id}>
+            <div className="overflow-hidden h-60">
               <img
-                src={bloggss.Imagess}
+                src={bloggss.image}
                 className="w-full h-full object-cover transition-transform ease-in-out hover:scale-120 duration-500 cursor-pointer"
                 alt="Zoom Image"
               />
             </div>
             <div>
               <div className="flex gap-8 items-center">
-                <p className="text-sm text-zinc-700 font-semibold capitalize my-4">
-                  {bloggss.subTitle}
+                <p
+                  className={`text-sms p-2 rounded-2xl font-semibold capitalize my-4 ${
+                    bloggss.subtitle === "Technology"
+                      ? "text-red-700 bg-red-100"
+                      : bloggss.subtitle === "Agriculture"
+                      ? "text-green-700 bg-green-100"
+                      : bloggss.subtitle === "Development"
+                      ? "text-yellow-700 bg-yellow-100"
+                      : bloggss.subtitle === "Fashion"
+                      ? "text-pink-700 bg-pink-100"
+                      : "text-blue-700 bg-blue-100"
+                  }`}
+                >
+                  {bloggss.subtitle}
                 </p>
-                <p className="text-sm text-balance text-zinc-500">
-                  {bloggss.dates}
+                <p className="text-sm text-balance text-zinc-500 font-semibold">
+                  {bloggss.createdAt}
                 </p>
               </div>
-              <h1 className="text-zinc-900 text-xl font-bold text-balance mb-4">
+              <h1 className="text-blue-900 text-xl font-bold text-balance mb-4">
                 {bloggss.title}
               </h1>
               <p className="text-zinc-600 text-balance mb-4">
-                {bloggss.Description}
+                {bloggss.description.length > MAXLENGTH
+                  ? `${bloggss.description.slice(0, MAXLENGTH)}...`
+                  : bloggss.description}
               </p>
               <div className="btn_class">
-                <button className="text-purple-900 text-[14px] sm:text-[16px] font-bold underline cursor-pointer text-balance">
-                  <Link to={`/blog/${bloggss.id}`}>Read More</Link>
+                <button className="text-blue-700 text-[14px] sm:text-[14px] font-bold cursor-pointer text-balance hover:text-purple-900 duration-200 transition-colors">
+                  <Link to={`/blog/${bloggss._id}`}>Read More</Link>
                 </button>
               </div>
             </div>
@@ -217,64 +233,38 @@ const PopularPost = () => {
 };
 
 const SecondPopularPosts = () => {
-  const DummyPosts = [
-    {
-      id: 1,
-      Imagess: Rules,
-      title: "8 Rules of Travelling In Sea You Need To Know",
-      Description:
-        "Travelling in sea has many advantages. Some of the advantages of transporting goods by sea include: you can ship large volumes at costs ",
-      subTitle: "Travel",
-      dates: "13 March 2023",
-    },
-    {
-      id: 2,
-      Imagess: Build,
-      title: "How to build strong portfolio and get a Job in UI/UX",
-      Description:
-        "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from ",
-      subTitle: "Development",
-      dates: "11 March 2023",
-    },
-    {
-      id: 3,
-      Imagess: FootBall,
-      title: "How to Be a Professional Footballer in 2023",
-      Description:
-        "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment. survival strategies to ensure proactive",
-      subTitle: "Sports",
-      dates: "16 March 2023",
-    },
-    {
-      id: 4,
-      Imagess: Rules,
-      title: "8 Rules of Travelling In Sea You Need To Know",
-      Description:
-        "Travelling in sea has many advantages. Some of the advantages of transporting goods by sea include: you can ship large volumes at costs ",
-      subTitle: "Travel",
-      dates: "13 March 2023",
-    },
-    {
-      id: 5,
-      Imagess: Build,
-      title: "How to build strong portfolio and get a Job in UI/UX",
-      Description:
-        "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from ",
-      subTitle: "Development",
-      dates: "11 March 2023",
-    },
-    {
-      id: 6,
-      Imagess: FootBall,
-      title: "How to Be a Professional Footballer in 2023",
-      Description:
-        "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment. survival strategies to ensure proactive",
-      subTitle: "Sports",
-      dates: "16 March 2023",
-    },
-  ];
+  interface PopularPost {
+    _id: string;
+    title: string;
+    subtitle: string;
+    description: string;
+    image: string;
+    createdAt: string;
+  }
+  const [popularFetch, setPopularFetch] = useState<PopularPost[]>([]);
+
+  const fetchPopularPosts = async () => {
+    try {
+      const response = await axios.get(
+        "https://task-server-0xvq.onrender.com/api/tasks"
+      );
+
+      if (response.status === 200) {
+        setPopularFetch(response.data.slice(3, 7));
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPopularPosts();
+  }, []);
+
+  const MAXLENGTH = 100;
+
   return (
-    <section className="max-w-[84%] sm:max-w-[80%] mx-auto">
+    <main className="blogs_posts max-w-[90%] sm:max-w-[80%] mx-auto">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl sm:text-2xl md:text-3xl text-zinc-800 font-semibold">
           Popular Post
@@ -285,43 +275,55 @@ const SecondPopularPosts = () => {
           </button>
         </div>
       </div>
-      <main className="blogs_posts">
-        <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-          {DummyPosts.map((bloggss, index) => (
-            <div className="potss" key={index}>
-              <div className="overflow-hidden">
-                <img
-                  src={bloggss.Imagess}
-                  className="w-full h-full object-cover transition-transform ease-in-out hover:scale-120 duration-500 cursor-pointer"
-                  alt="Zoom Image"
-                />
-              </div>
-              <div>
-                <div className="flex gap-8 items-center">
-                  <p className="text-sm text-zinc-700 font-semibold capitalize my-4">
-                    {bloggss.subTitle}
-                  </p>
-                  <p className="text-sm text-balance text-zinc-500">
-                    {bloggss.dates}
-                  </p>
-                </div>
-                <h1 className="text-zinc-900 text-xl font-bold mb-4">
-                  {bloggss.title}
-                </h1>
-                <p className="text-zinc-600 w-full mb-4">
-                  {bloggss.Description}
+      <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
+        {popularFetch.map((bloggss) => (
+          <div className="potss" key={bloggss._id}>
+            <div className="overflow-hidden h-60">
+              <img
+                src={bloggss.image}
+                className="w-full h-full object-cover transition-transform ease-in-out hover:scale-120 duration-500 cursor-pointer"
+                alt="Zoom Image"
+              />
+            </div>
+            <div>
+              <div className="flex gap-8 items-center">
+                <p
+                  className={`text-sms p-2 rounded-2xl font-semibold capitalize my-4 ${
+                    bloggss.subtitle === "Technology"
+                      ? "text-red-700 bg-red-100"
+                      : bloggss.subtitle === "Agriculture"
+                      ? "text-green-700 bg-green-100"
+                      : bloggss.subtitle === "Development"
+                      ? "text-yellow-700 bg-yellow-100"
+                      : bloggss.subtitle === "Fashion"
+                      ? "text-pink-700 bg-pink-100"
+                      : "text-blue-700 bg-blue-100"
+                  }`}
+                >
+                  {bloggss.subtitle}
                 </p>
-                <div className="btn_class">
-                  <button className="text-purple-900 text-[14px] sm:text-[16px] font-bold underline cursor-pointer text-balance">
-                    <Link to={`/blog/${bloggss.id}`}>Read More</Link>
-                  </button>
-                </div>
+                <p className="text-sm text-balance text-zinc-500 font-semibold">
+                  {new Date(bloggss.createdAt).toDateString()}
+                </p>
+              </div>
+              <h1 className="text-blue-900 text-xl font-bold text-balance mb-4">
+                {bloggss.title}
+              </h1>
+              <p className="text-zinc-600 text-balance mb-4">
+                {bloggss.description.length > MAXLENGTH
+                  ? `${bloggss.description.slice(0, MAXLENGTH)}...`
+                  : bloggss.description}
+              </p>
+              <div className="btn_class">
+                <button className="text-blue-700 text-[14px] sm:text-[14px] font-bold cursor-pointer text-balance hover:text-purple-900 duration-200 transition-colors">
+                  <Link to={`/blog/${bloggss._id}`}>Read More</Link>
+                </button>
               </div>
             </div>
-          ))}
-        </article>
-      </main>
-    </section>
+          </div>
+        ))}
+      </article>
+    </main>
   );
 };
 
