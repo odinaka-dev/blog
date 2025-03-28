@@ -10,6 +10,13 @@ import Blogs from "./Pages/Blogs";
 import Blog from "./Pages/Blog";
 import Contact from "./Pages/Contact";
 import Pageloader from "./Components/pageLoader";
+// users imports
+import Dashboard from "./user/Pages/Dashboard";
+import AddBlogs from "./user/Pages/AddBlogs";
+import AllBlogs from "./user/Pages/AllBlogs";
+import Analytics from "./user/Pages/Analytics";
+import Settings from "./user/Pages/Settings";
+import DashboardLayout from "./user/Components/DashboardLayout";
 
 const route = createBrowserRouter([
   {
@@ -23,6 +30,20 @@ const route = createBrowserRouter([
       { path: "blog/:id", element: <Blog /> },
       { path: "contact", element: <Contact /> },
       { path: "pageloader", element: <Pageloader /> },
+      // Registered users Dashboard
+    ],
+  },
+
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    errorElement: <Error />,
+    children: [
+      { index: true, element: <Dashboard /> },
+      { path: "add", element: <AddBlogs /> },
+      { path: "all", element: <AllBlogs /> },
+      { path: "analytics", element: <Analytics /> },
+      { path: "settings", element: <Settings /> },
     ],
   },
 ]);
