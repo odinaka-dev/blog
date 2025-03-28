@@ -90,14 +90,14 @@ const BlogsPosts = () => {
             </div>
             <div>
               <div className="flex gap-8 items-center">
-                <p className="text-sm text-zinc-700 font-semibold capitalize my-4">
+                <p className="text-sm text-blue-700 bg-blue-100 p-2 rounded-2xl font-semibold capitalize my-4">
                   {bloggss.subtitle}
                 </p>
-                <p className="text-sm text-balance text-zinc-500">
-                  {bloggss.createdAt}
+                <p className="text-sm text-balance text-zinc-500 font-semibold">
+                  {new Date(bloggss.createdAt).toDateString()}
                 </p>
               </div>
-              <h1 className="text-zinc-900 text-lg font-bold text-balance mb-4">
+              <h1 className="text-blue-950 text-lg font-bold text-balance mb-4">
                 {bloggss.title}
               </h1>
               <p className="text-zinc-600 text-balance mb-4">
@@ -106,7 +106,7 @@ const BlogsPosts = () => {
                   : bloggss.description}
               </p>
               <div className="btn_class">
-                <button className="text-purple-900 text-[14px] sm:text-[16px] font-bold underline cursor-pointer text-balance">
+                <button className="text-blue-800 text-[16px] sm:text-[14px] font-semibold cursor-pointer text-balance hover:text-purple-900 duration-300 transition-colors">
                   <Link to={`/blog/${bloggss.id}`}>Read More</Link>
                 </button>
               </div>
