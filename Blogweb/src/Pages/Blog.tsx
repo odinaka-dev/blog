@@ -82,7 +82,7 @@ const SingleBlogPost = () => {
           <img src={blog.image} alt="" className="w-250 h-80" />
         </div>
         <div className="content_texts">
-          <div className="max-w-[100%] md:max-w-[90%] mx-auto text-zinc-500 text-balance mt-8">
+          <div className="max-w-[100%] md:max-w-[90%] mx-auto text-zinc-500 text-balance mt-8 leading-8">
             {blog.description}
           </div>
         </div>

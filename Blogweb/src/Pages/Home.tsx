@@ -7,6 +7,7 @@ import SubImage from "../assets/Second.png";
 import ThirdImage from "../assets/Third.png";
 import SubFooter from "../Components/SubFooter";
 import Footer from "../Components/Footer";
+import Load from "../Components/Load";
 
 const Home = () => {
   return (
@@ -177,54 +178,60 @@ const PopularPost = () => {
 
   return (
     <main className="blogs_posts">
-      <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
-        {popularFetch.map((bloggss) => (
-          <div className="potss" key={bloggss._id}>
-            <div className="overflow-hidden h-60">
-              <img
-                src={bloggss.image}
-                className="w-full h-full object-cover transition-transform ease-in-out hover:scale-120 duration-500 cursor-pointer"
-                alt="Zoom Image"
-              />
-            </div>
-            <div>
-              <div className="flex gap-8 items-center">
-                <p
-                  className={`text-sms p-2 rounded-2xl font-semibold capitalize my-4 ${
-                    bloggss.subtitle === "Technology"
-                      ? "text-red-700 bg-red-100"
-                      : bloggss.subtitle === "Agriculture"
-                      ? "text-green-700 bg-green-100"
-                      : bloggss.subtitle === "Development"
-                      ? "text-yellow-700 bg-yellow-100"
-                      : bloggss.subtitle === "Fashion"
-                      ? "text-pink-700 bg-pink-100"
-                      : "text-blue-700 bg-blue-100"
-                  }`}
-                >
-                  {bloggss.subtitle}
-                </p>
-                <p className="text-sm text-balance text-zinc-500 font-semibold">
-                  {bloggss.createdAt}
-                </p>
+      {popularFetch.length > 0 ? (
+        <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
+          {popularFetch.map((bloggss) => (
+            <div className="potss" key={bloggss._id}>
+              <div className="overflow-hidden h-60">
+                <img
+                  src={bloggss.image}
+                  className="w-full h-full object-cover transition-transform ease-in-out hover:scale-120 duration-500 cursor-pointer"
+                  alt="Zoom Image"
+                />
               </div>
-              <h1 className="text-blue-900 text-xl font-bold text-balance mb-4">
-                {bloggss.title}
-              </h1>
-              <p className="text-zinc-600 text-balance mb-4">
-                {bloggss.description.length > MAXLENGTH
-                  ? `${bloggss.description.slice(0, MAXLENGTH)}...`
-                  : bloggss.description}
-              </p>
-              <div className="btn_class">
-                <button className="text-blue-700 text-[14px] sm:text-[14px] font-bold cursor-pointer text-balance hover:text-purple-900 duration-200 transition-colors">
-                  <Link to={`/blog/${bloggss._id}`}>Read More</Link>
-                </button>
+              <div>
+                <div className="flex gap-8 items-center">
+                  <p
+                    className={`text-sms p-2 rounded-2xl font-semibold capitalize my-4 ${
+                      bloggss.subtitle === "Technology"
+                        ? "text-red-700 bg-red-100"
+                        : bloggss.subtitle === "Agriculture"
+                        ? "text-green-700 bg-green-100"
+                        : bloggss.subtitle === "Development"
+                        ? "text-yellow-700 bg-yellow-100"
+                        : bloggss.subtitle === "Fashion"
+                        ? "text-pink-700 bg-pink-100"
+                        : "text-blue-700 bg-blue-100"
+                    }`}
+                  >
+                    {bloggss.subtitle}
+                  </p>
+                  <p className="text-sm text-balance text-zinc-500 font-semibold">
+                    {new Date(bloggss.createdAt).toDateString()}
+                  </p>
+                </div>
+                <h1 className="text-blue-900 text-xl font-bold text-balance mb-4">
+                  {bloggss.title}
+                </h1>
+                <p className="text-zinc-600 text-balance mb-4">
+                  {bloggss.description.length > MAXLENGTH
+                    ? `${bloggss.description.slice(0, MAXLENGTH)}...`
+                    : bloggss.description}
+                </p>
+                <div className="btn_class">
+                  <button className="text-blue-700 text-[14px] sm:text-[14px] font-bold cursor-pointer text-balance hover:text-purple-900 duration-200 transition-colors">
+                    <Link to={`/blog/${bloggss._id}`}>Read More</Link>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </article>
+          ))}
+        </article>
+      ) : (
+        <div className="flex justify-center">
+          <Load />
+        </div>
+      )}
     </main>
   );
 };
