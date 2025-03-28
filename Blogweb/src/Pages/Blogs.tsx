@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router";
-import Rules from "../assets/Rules.png";
 import SubFooter from "../Components/SubFooter";
 import Footer from "../Components/Footer";
 import { BiSearch } from "react-icons/bi";
@@ -60,7 +59,7 @@ const BlogsPosts = () => {
   const fetchingBlogs = async () => {
     try {
       const response = await axios.get(
-        "https://task-server-w3yx.onrender.com/api/tasks"
+        "https://task-server-0xvq.onrender.com/api/tasks"
       );
       if (response.status === 200) {
         setFetchBlogs(response.data);
@@ -82,9 +81,9 @@ const BlogsPosts = () => {
       <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:;grid-cols-4 gap-4 mt-12">
         {fetchBlogs.map((bloggss) => (
           <div className="potss" key={bloggss.id}>
-            <div className="overflow-hidden">
+            <div className="overflow-hidden h-60">
               <img
-                src={Rules}
+                src={bloggss.image}
                 className="w-full h-full object-cover transition-transform ease-in-out hover:scale-120 duration-500 cursor-pointer"
                 alt="Zoom Image"
               />

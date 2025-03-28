@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
 import BlogBanner from "../assets/blogBanner.png";
-import Rules from "../assets/Rules.png";
 import Footer from "../Components/Footer";
 
 const Blog = () => {
@@ -107,6 +106,7 @@ interface PopularPost {
   title: string;
   subtitle: string;
   description: string;
+  image: string;
   createdAt: string;
 }
 
@@ -116,7 +116,7 @@ const PopularPost = () => {
   const fetchPopularPosts = async () => {
     try {
       const response = await axios.get(
-        "https://task-server-w3yx.onrender.com/api/tasks"
+        "https://task-server-0xvq.onrender.com/api/tasks"
       );
 
       if (response.status === 200) {
@@ -150,7 +150,7 @@ const PopularPost = () => {
           <div className="potss" key={bloggss.id}>
             <div className="overflow-hidden">
               <img
-                src={Rules}
+                src={bloggss.image}
                 className="w-full h-full object-cover transition-transform ease-in-out hover:scale-120 duration-500 cursor-pointer"
                 alt="Zoom Image"
               />
