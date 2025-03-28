@@ -148,7 +148,7 @@ const PopularPost = () => {
       <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
         {popularFetch.map((bloggss) => (
           <div className="potss" key={bloggss.id}>
-            <div className="overflow-hidden">
+            <div className="overflow-hidden h-60">
               <img
                 src={bloggss.image}
                 className="w-full h-full object-cover transition-transform ease-in-out hover:scale-120 duration-500 cursor-pointer"
@@ -157,14 +157,26 @@ const PopularPost = () => {
             </div>
             <div>
               <div className="flex gap-8 items-center">
-                <p className="text-sm text-zinc-700 font-semibold capitalize my-4">
+                <p
+                  className={`text-sms p-2 rounded-2xl font-semibold capitalize my-4 ${
+                    bloggss.subtitle === "Technology"
+                      ? "text-red-700 bg-red-100"
+                      : bloggss.subtitle === "Agriculture"
+                      ? "text-green-700 bg-green-100"
+                      : bloggss.subtitle === "Development"
+                      ? "text-yellow-700 bg-yellow-100"
+                      : bloggss.subtitle === "Fashion"
+                      ? "text-pink-700 bg-pink-100"
+                      : "text-blue-700 bg-blue-100"
+                  }`}
+                >
                   {bloggss.subtitle}
                 </p>
-                <p className="text-sm text-balance text-zinc-500">
+                <p className="text-sm text-balance text-zinc-500 font-semibold">
                   {bloggss.createdAt}
                 </p>
               </div>
-              <h1 className="text-zinc-900 text-xl font-bold text-balance mb-4">
+              <h1 className="text-blue-900 text-xl font-bold text-balance mb-4">
                 {bloggss.title}
               </h1>
               <p className="text-zinc-600 text-balance mb-4">
@@ -173,7 +185,7 @@ const PopularPost = () => {
                   : bloggss.description}
               </p>
               <div className="btn_class">
-                <button className="text-purple-900 text-[14px] sm:text-[16px] font-bold underline cursor-pointer text-balance">
+                <button className="text-blue-700 text-[14px] sm:text-[14px] font-bold cursor-pointer text-balance hover:text-purple-900 duration-200 transition-colors">
                   <Link to={`/blog/${bloggss.id}`}>Read More</Link>
                 </button>
               </div>

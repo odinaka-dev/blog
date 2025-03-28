@@ -45,7 +45,7 @@ const BlogsBanner = () => {
 };
 
 interface Blog {
-  id: string;
+  _id: string;
   title: string;
   subtitle: string;
   description: string;
@@ -80,7 +80,7 @@ const BlogsPosts = () => {
     <main className="blogs_posts max-w-[90%] mx-auto">
       <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:;grid-cols-4 gap-4 mt-12">
         {fetchBlogs.map((bloggss) => (
-          <div className="potss" key={bloggss.id}>
+          <div className="potss" key={bloggss._id}>
             <div className="overflow-hidden h-60">
               <img
                 src={bloggss.image}
@@ -90,7 +90,19 @@ const BlogsPosts = () => {
             </div>
             <div>
               <div className="flex gap-8 items-center">
-                <p className="text-sm text-blue-700 bg-blue-100 p-2 rounded-2xl font-semibold capitalize my-4">
+                <p
+                  className={`text-sms p-2 rounded-2xl font-semibold capitalize my-4 ${
+                    bloggss.subtitle === "Technology"
+                      ? "text-red-700 bg-red-100"
+                      : bloggss.subtitle === "Agriculture"
+                      ? "text-green-700 bg-green-100"
+                      : bloggss.subtitle === "Development"
+                      ? "text-yellow-700 bg-yellow-100"
+                      : bloggss.subtitle === "Fashion"
+                      ? "text-pink-700 bg-pink-100"
+                      : "text-blue-700 bg-blue-100"
+                  }`}
+                >
                   {bloggss.subtitle}
                 </p>
                 <p className="text-sm text-balance text-zinc-500 font-semibold">
@@ -107,7 +119,7 @@ const BlogsPosts = () => {
               </p>
               <div className="btn_class">
                 <button className="text-blue-800 text-[16px] sm:text-[14px] font-semibold cursor-pointer text-balance hover:text-purple-900 duration-300 transition-colors">
-                  <Link to={`/blog/${bloggss.id}`}>Read More</Link>
+                  <Link to={`/blog/${bloggss._id}`}>Read More</Link>
                 </button>
               </div>
             </div>
