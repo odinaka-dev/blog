@@ -1,29 +1,44 @@
 import { BiBookAdd, BiBookReader, BiHome } from "react-icons/bi";
 import { SiMedusa } from "react-icons/si";
 import { GrAnalytics, GrSettingsOption } from "react-icons/gr";
+import { BsMenuApp } from "react-icons/bs";
+import { Link } from "react-router";
 
 const DashboardHeader = () => {
   return (
-    <nav className="">
-      <div className="logo flex justify-center relative top-10 text-3xl">
-        <SiMedusa className="text-blue-700" />
+    <nav className="bg-blue-950 hidden sm:block">
+      <div className="logo flex relative top-10 left-4 text-3xl">
+        <SiMedusa className="text-white" />
       </div>
       <div className="logo flex items-center h-screen shadow-2xl">
-        <ul className="text-blue-700 text-2xl px-6">
+        <ul className="text-white text-2xl px-6">
           <li className="hover:animate-bounce duration-300">
-            <BiHome />
+            <BsMenuApp />
           </li>
           <li className="hover:animate-bounce duration-300 mb-12 mt-12 cursor-pointer">
-            <BiBookAdd />
+            <Link to={"/dashboard"}>
+              <BiHome />
+            </Link>
+          </li>
+          <li className="hover:animate-bounce duration-300 mb-12 mt-12 cursor-pointer">
+            <Link to={"/dashboard/add"}>
+              <BiBookAdd />
+            </Link>
           </li>
           <li className="hover:animate-bounce duration-300 mb-12 cursor-pointer">
-            <BiBookReader />
+            <Link to={"/dashboard/all"}>
+              <BiBookReader />
+            </Link>
           </li>
           <li className="hover:animate-bounce duration-300 mb-12 cursor-pointer">
-            <GrAnalytics />
+            <Link to={"/dashboard/analytics"}>
+              <GrAnalytics />
+            </Link>
           </li>
           <li className="hover:animate-bounce duration-300 mt-12">
-            <GrSettingsOption />
+            <Link to={"/dashboard/settings"}>
+              <GrSettingsOption />
+            </Link>
           </li>
         </ul>
       </div>

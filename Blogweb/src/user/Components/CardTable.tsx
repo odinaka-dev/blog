@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { BsPerson } from "react-icons/bs";
 
 const CardTableData = () => {
   return (
@@ -41,7 +40,7 @@ const ComplaintsTable = () => {
     fetchingBlogs();
   }, []);
 
-  const itemsPerPage = 7;
+  const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
 
   // calculating the total pages
@@ -67,8 +66,7 @@ const ComplaintsTable = () => {
 
   return (
     <div className="w-[100%] bg-white">
-      <SubHeader />
-      <div className="m-4">
+      <div className="">
         <table className="overflow-x-auto min-w-full bg-white border border-gray-200 rounded-lg">
           <thead>
             <tr className="bg-gray-100 border-b border-b-[#EAECF0]">
@@ -93,16 +91,7 @@ const ComplaintsTable = () => {
                 className="border-b border-b-[#EAECF0] text-[#475467] hover:bg-gray-50"
               >
                 <td className="py-3 px-4 border-r border-r-[#EAECF0]">
-                  <div className="flex items-center gap-2">
-                    <p className=" w-20">
-                      <img
-                        src={complaint.image}
-                        alt=""
-                        className="w-10 sm:w-20 rounded-sm"
-                      />
-                    </p>
-                    <p className="font-semibold">{complaint.title}</p>
-                  </div>
+                  {complaint.title}
                 </td>
                 <td className="hidden sm:table-cell text-center py-3 px-4 border-r border-r-[#EAECF0]">
                   {complaint.author}
@@ -144,21 +133,5 @@ const ComplaintsTable = () => {
 };
 
 // the main table data in html jsx format
-
-const SubHeader = () => {
-  return (
-    <div className="relative top-0">
-      <div className="border-b border-b-zinc-300 bg-white py-4 px-2 sm:px-6 flex justify-between items-center text-blue-800">
-        <div className="capitalize font-bold">All Blogs</div>
-        <div className="flex items-center gap-2">
-          <p>Uchechukwu Peter</p>
-          <div className="p-2 bg-blue-400 text-white rounded-[50%]">
-            <BsPerson />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export default CardTableData;

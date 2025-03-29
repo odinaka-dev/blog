@@ -64,7 +64,7 @@ const BlogsPosts = () => {
       );
       if (response.status === 200) {
         setFetchBlogs(response.data);
-        console.log(response.data[0].subtitle);
+        // console.log(response.data[0].subtitle);
       }
     } catch (error) {
       console.error("error fetching the data");
