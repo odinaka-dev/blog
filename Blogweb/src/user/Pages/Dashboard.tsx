@@ -8,7 +8,7 @@ import CardTableData from "../Components/CardTable";
 const Dashboard = () => {
   return (
     <React.Fragment>
-      <section className="mx-2 sm:mx-4 md:mx-8 bg-amber-50">
+      <section className="mx-2 sm:mx-4 md:mx-8">
         <SubHeader />
         <DashboardComponent />
         <CardTableData />

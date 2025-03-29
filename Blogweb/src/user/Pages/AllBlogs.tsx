@@ -93,16 +93,7 @@ const ComplaintsTable = () => {
                 className="border-b border-b-[#EAECF0] text-[#475467] hover:bg-gray-50"
               >
                 <td className="py-3 px-4 border-r border-r-[#EAECF0]">
-                  <div className="flex items-center gap-2">
-                    <p className=" w-20">
-                      <img
-                        src={complaint.image}
-                        alt=""
-                        className="w-10 sm:w-20 rounded-sm"
-                      />
-                    </p>
-                    <p className="font-semibold">{complaint.title}</p>
-                  </div>
+                  {complaint.title}
                 </td>
                 <td className="hidden sm:table-cell text-center py-3 px-4 border-r border-r-[#EAECF0]">
                   {complaint.author}
